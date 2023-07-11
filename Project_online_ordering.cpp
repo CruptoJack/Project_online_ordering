@@ -1,20 +1,48 @@
-﻿// Project_online_ordering.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+#include <vector>
+#include <string>
 #include <iostream>
+using namespace std;
+class Product {
+private:
+    string name;
+    double price;
+public:
+    Product(string productName, double productPrice);
+    // Методы доступа
+};
 
-int main()
-{
-    std::cout << "Hello World!\n";
+class Order {
+private:
+    vector<Product> productList;
+public:
+    void addToOrder(Product product);
+    void removeFromOrder(int index);
+
+};
+Product::Product(string productName, double productPrice) {
+    name = productName;
+    price = productPrice;
+}
+// Добавление продукта к заказу Order
+void Order::addToOrder(Product product) {
+    productList.push_back(product);
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+// Удаление продукта из заказа Order по его индексу в списке
+void Order::removeFromOrder(int index) {
+    if (index >= 0 && index < productList.size()) {
+        productList.erase(productList.begin() + index);
+    }
+}
+int main() {
+    Order myOrder; // Создаем пустой заказ
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
+    // Добавляем товар
+    Product product1("Ноутбук", 1500);
+
+    myOrder.addToOrder(product1);
+
+    // Удаляем продукт из заказа
+    myOrder.removeFromOrder(0);
+
+}
